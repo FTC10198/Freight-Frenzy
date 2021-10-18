@@ -26,6 +26,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
@@ -66,16 +67,16 @@ public class SampleMecanumDrive extends MecanumDrive {
     private static final TrajectoryVelocityConstraint VEL_CONSTRAINT = getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, TRACK_WIDTH);
     private static final TrajectoryAccelerationConstraint ACCEL_CONSTRAINT = getAccelerationConstraint(MAX_ACCEL);
 
+    private VoltageSensor batteryVoltageSensor;
+
     private TrajectoryFollower follower;
 
-    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
-    private List<DcMotorEx> motors;
-
-    private BNO055IMU imu;
-    private VoltageSensor batteryVoltageSensor;
+    private final HardwareMapping robot = new HardwareMapping();
 
     public SampleMecanumDrive(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
+
+        robot.init(hardwareMap);
 
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
                 new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
@@ -88,24 +89,7 @@ public class SampleMecanumDrive extends MecanumDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // TODO: adjust the names of the following hardware devices to match your configuration
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters);
-
-        // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
-        // upward (normal to the floor) using a command like the following:
-        // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
-
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
-
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
             motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
             motor.setMotorType(motorConfigurationType);
@@ -204,13 +188,13 @@ public class SampleMecanumDrive extends MecanumDrive {
     }
 
     public void setMode(DcMotor.RunMode runMode) {
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             motor.setMode(runMode);
         }
     }
 
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             motor.setZeroPowerBehavior(zeroPowerBehavior);
         }
     }
@@ -221,7 +205,7 @@ public class SampleMecanumDrive extends MecanumDrive {
                 coefficients.f * 12 / batteryVoltageSensor.getVoltage()
         );
 
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             motor.setPIDFCoefficients(runMode, compensatedCoefficients);
         }
     }
@@ -250,7 +234,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     @Override
     public List<Double> getWheelPositions() {
         List<Double> wheelPositions = new ArrayList<>();
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
         }
         return wheelPositions;
@@ -259,7 +243,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     @Override
     public List<Double> getWheelVelocities() {
         List<Double> wheelVelocities = new ArrayList<>();
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             wheelVelocities.add(encoderTicksToInches(motor.getVelocity()));
         }
         return wheelVelocities;
@@ -267,15 +251,15 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v);
-        leftRear.setPower(v1);
-        rightRear.setPower(v2);
-        rightFront.setPower(v3);
+        robot.leftFront.setPower(v);
+        robot.leftRear.setPower(v1);
+        robot.rightRear.setPower(v2);
+        robot.rightFront.setPower(v3);
     }
 
     @Override
     public double getRawExternalHeading() {
-        return imu.getAngularOrientation().firstAngle;
+        return robot.imu.getAngularOrientation().firstAngle;
     }
 
     @Override
@@ -298,7 +282,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
         // flat on a surface
 
-        return (double) imu.getAngularVelocity().zRotationRate;
+        return (double) robot.imu.getAngularVelocity().zRotationRate;
     }
 
     public static TrajectoryVelocityConstraint getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {

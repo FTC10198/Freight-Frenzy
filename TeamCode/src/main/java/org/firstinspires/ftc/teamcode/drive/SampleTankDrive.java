@@ -26,6 +26,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
@@ -65,13 +66,16 @@ public class SampleTankDrive extends TankDrive {
 
     private TrajectoryFollower follower;
 
-    private List<DcMotorEx> motors, leftMotors, rightMotors;
-    private BNO055IMU imu;
+    private List<DcMotorEx> leftMotors, rightMotors;
 
     private VoltageSensor batteryVoltageSensor;
 
+    private final HardwareMapping robot = new HardwareMapping();
+
     public SampleTankDrive(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH);
+
+        robot.init(hardwareMap);
 
         follower = new TankPIDVAFollower(AXIAL_PID, CROSS_TRACK_PID,
                 new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
@@ -84,27 +88,10 @@ public class SampleTankDrive extends TankDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // TODO: adjust the names of the following hardware devices to match your configuration
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters);
+        leftMotors = Arrays.asList(robot.leftFront, robot.leftRear);
+        rightMotors = Arrays.asList(robot.rightFront, robot.rightRear);
 
-        // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
-        // upward (normal to the floor) using a command like the following:
-        // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
-
-        // add/remove motors depending on your robot (e.g., 6WD)
-        DcMotorEx leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        DcMotorEx leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        DcMotorEx rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        DcMotorEx rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
-
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-        leftMotors = Arrays.asList(leftFront, leftRear);
-        rightMotors = Arrays.asList(rightFront, rightRear);
-
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
             motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
             motor.setMotorType(motorConfigurationType);
@@ -204,13 +191,13 @@ public class SampleTankDrive extends TankDrive {
     }
 
     public void setMode(DcMotor.RunMode runMode) {
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             motor.setMode(runMode);
         }
     }
 
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             motor.setZeroPowerBehavior(zeroPowerBehavior);
         }
     }
@@ -220,7 +207,7 @@ public class SampleTankDrive extends TankDrive {
                 coefficients.p, coefficients.i, coefficients.d,
                 coefficients.f * 12 / batteryVoltageSensor.getVoltage()
         );
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : robot.motors) {
             motor.setPIDFCoefficients(runMode, compensatedCoefficients);
         }
     }
@@ -279,7 +266,7 @@ public class SampleTankDrive extends TankDrive {
 
     @Override
     public double getRawExternalHeading() {
-        return imu.getAngularOrientation().firstAngle;
+        return robot.imu.getAngularOrientation().firstAngle;
     }
 
     @Override
@@ -302,7 +289,7 @@ public class SampleTankDrive extends TankDrive {
         // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
         // flat on a surface
 
-        return (double) imu.getAngularVelocity().zRotationRate;
+        return (double) robot.imu.getAngularVelocity().zRotationRate;
     }
 
     public static TrajectoryVelocityConstraint getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {
