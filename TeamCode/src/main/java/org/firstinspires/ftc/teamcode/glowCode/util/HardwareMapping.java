@@ -18,21 +18,21 @@ import java.util.List;
 public class HardwareMapping {
 
     /* Public OpMode members. */
-    public DcMotor shooterRight = null;
-    public DcMotor shooterLeft = null;
-    public DcMotor intake = null;
-    public DcMotor wobbleLift = null;
-    public Servo flicker = null;
-    public Servo ArmServo = null;
-    public Servo liftServo = null;
+    //public DcMotor shooterRight = null;
+    //public DcMotor shooterLeft = null;
+    //public DcMotor intake = null;
+    //public DcMotor wobbleLift = null;
+    //public Servo flicker = null;
+    //public Servo ArmServo = null;
+    //public Servo liftServo = null;
 
     public VuforiaStuff vuforiaStuff;
     private VuforiaLocalizer vuforia;
-    DigitalChannel touchSensor;
+    //DigitalChannel touchSensor;
     private static final String VUFORIA_KEY = "ATOlfJr/////AAABmUTNuojv10IyojJgb1ipUl5AFc9IdiMS/PX55ILLnxS3ZPIjWu/kKu4fRsmZnfgrOfXcXnYyoPbHFCQOiBSJR1y2voTvDBlVWM1Lq2YNVgaOBT5g+00yR9u7kHuOxaCouUCcQUjbu2T3CFsTeLzk5snuYDnpkERDb//651aurmTW+dlNlmHFiP6P5h2co6MZQNfSQc1/fVKM7bS7STDCsX1Ro4Nyj0rfTVCp8kK/rHzsyZ8JcZ1EvYz746d0Ma6z9+MCoZ7EGHw9XdK3dW3sYlXVXTLGMDVEbqAnfqlfnh7C67SGrpkytPabcbVWAilptCGmzykRg7rZt6HlS/qM10diikwTZL9aIyvZZFIY3yWf";
 
     /* local OpMode members. */
-    HardwareMap hwMap = null;
+    public HardwareMap hwMap = null;
     private final ElapsedTime period = new ElapsedTime();
 
 /* Copied out of SampleMecanumDrive*/
@@ -66,37 +66,34 @@ public class HardwareMapping {
 /*End Copied out of SampleMecanumDrive*/
 
         // Define and Initialize Motors
-        shooterRight = hwMap.get(DcMotorEx.class, "shooterRight");
-        shooterLeft = hwMap.get(DcMotorEx.class, "shooterLeft");
-        intake = hwMap.get(DcMotorEx.class, "intake");
-        wobbleLift = hwMap.get(DcMotorEx.class, "wobbleLift");
+        //shooterRight = hwMap.get(DcMotorEx.class, "shooterRight");
+        //shooterLeft = hwMap.get(DcMotorEx.class, "shooterLeft");
+        //intake = hwMap.get(DcMotorEx.class, "intake");
+        //wobbleLift = hwMap.get(DcMotorEx.class, "wobbleLift");
 
 
         // Set all motors to zero power
-        shooterRight.setPower(0);
-        shooterLeft.setPower(0);
-        intake.setPower(0);
-        wobbleLift.setPower(0);
+        //shooterRight.setPower(0);
+        //shooterLeft.setPower(0);
+        //intake.setPower(0);
+        //wobbleLift.setPower(0);
         //sonia test
-        wobbleLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wobbleLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //wobbleLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //wobbleLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        wobbleLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //wobbleLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Define and initialize ALL installed servos.
-        flicker = hwMap.get(Servo.class, "flicker");
-        ArmServo = hwMap.get(Servo.class, "ArmServo");
-        liftServo = hwMap.get(Servo.class, "liftServo");
-        /*clampServo  = hwMap.get(Servo.class, "clampServo");*/
-        /*gateServo  = hwMap.get(CRServo.class, "gateServo");*/
-        touchSensor = hwMap.get(DigitalChannel.class, "touchSensor");
+        //flicker = hwMap.get(Servo.class, "flicker");
+        //ArmServo = hwMap.get(Servo.class, "ArmServo");
+        //liftServo = hwMap.get(Servo.class, "liftServo");
 
         // set the digital channel to input.
-        touchSensor.setMode(DigitalChannel.Mode.INPUT);
+        //touchSensor.setMode(DigitalChannel.Mode.INPUT);
 
-        flicker.setPosition(0);
-        ArmServo.setPosition(0.80);
-        liftServo.setPosition(0.05);
+        //flicker.setPosition(0);
+        //ArmServo.setPosition(0.80);
+        //liftServo.setPosition(0.05);
         /*clampServo.setPosition(0.35);*/
 
         WebcamName webcamName;
@@ -113,16 +110,16 @@ public class HardwareMapping {
         vuforiaStuff = new VuforiaStuff(vuforia);
     }
 
-    public void armOut(double armDistance, double armPower) {
+    /*public void armOut(double armDistance, double armPower) {
         double armPosition = wobbleLift.getCurrentPosition();
         while (Math.abs(armPosition - wobbleLift.getCurrentPosition()) < armDistance) {
             wobbleLift.setPower(armPower);
 
         }
         wobbleLift.setPower(0);
-    }
+    }*/
 
-    public void flickRings() {
+    /*public void flickRings() {
         flicker.setPosition(0);
         ElapsedTime runtime2 = new ElapsedTime();
         while(runtime2.milliseconds() < 1000){
@@ -131,5 +128,5 @@ public class HardwareMapping {
 
             }
         }
-    }
+    }*/
 }
