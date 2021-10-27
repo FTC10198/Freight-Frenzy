@@ -28,21 +28,30 @@ public class TestAuto extends LinearOpMode{
         if (opModeIsActive()) {
 
             // We want to start the bot at x: 10, y: -8, heading: 90 degrees
-            //Pose2d startPose = new Pose2d(10, -8, Math.toRadians(90));
+            Pose2d startPose = new Pose2d(10, -8, Math.toRadians(90));
 
-            //drives.setPoseEstimate(startPose);
+            drives.setPoseEstimate(startPose);
 
-            //Trajectory traj1 = drives.trajectoryBuilder(startPose)
-            //      .forward(50)
-            //      .strafeLeft(50)
-            //      .back(50)
-            //      .strafeRight(50)
-            //      .build();
+            Trajectory traj1 = drives.trajectoryBuilder(startPose)
+                  .forward(50)
+                  .build();
+            Trajectory traj2 = drives.trajectoryBuilder(traj1.end())
+                  .strafeLeft(50)
+                  .build();
+            Trajectory traj3 = drives.trajectoryBuilder(traj2.end())
+                  .back(50)
+                  .build();
+            Trajectory traj4 = drives.trajectoryBuilder(traj3.end())
+                  .strafeRight(50)
+                  .build();
 
-            //drives.followTrajectory(traj1);
+            drives.followTrajectory(traj1);
+            drives.followTrajectory(traj2);
+            drives.followTrajectory(traj3);
+            drives.followTrajectory(traj4);
 
-//            drives.turn(90);
-//            drives.turn(-90);
+            drives.turn(90);
+            drives.turn(-90);
         }
     }
 }

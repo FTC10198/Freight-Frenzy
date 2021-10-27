@@ -26,10 +26,9 @@ public class HardwareMapping {
     //public Servo ArmServo = null;
     //public Servo liftServo = null;
 
-    public VuforiaStuff vuforiaStuff;
-    private VuforiaLocalizer vuforia;
-    //DigitalChannel touchSensor;
-    private static final String VUFORIA_KEY = "ATOlfJr/////AAABmUTNuojv10IyojJgb1ipUl5AFc9IdiMS/PX55ILLnxS3ZPIjWu/kKu4fRsmZnfgrOfXcXnYyoPbHFCQOiBSJR1y2voTvDBlVWM1Lq2YNVgaOBT5g+00yR9u7kHuOxaCouUCcQUjbu2T3CFsTeLzk5snuYDnpkERDb//651aurmTW+dlNlmHFiP6P5h2co6MZQNfSQc1/fVKM7bS7STDCsX1Ro4Nyj0rfTVCp8kK/rHzsyZ8JcZ1EvYz746d0Ma6z9+MCoZ7EGHw9XdK3dW3sYlXVXTLGMDVEbqAnfqlfnh7C67SGrpkytPabcbVWAilptCGmzykRg7rZt6HlS/qM10diikwTZL9aIyvZZFIY3yWf";
+    //public VuforiaStuff vuforiaStuff;
+    //private VuforiaLocalizer vuforia;
+    //private static final String VUFORIA_KEY = "Ac5oJT3/////AAABmaqjC8BtVEdCqJ9KEctcjrJjRRHPEsjVpJWvESCluMdAjHDqmXj1hS15xQ/ZC19fWDvWS+synqHGRqZmXH+i3WbN2DElVFCs667s5+7HrgrsLzKbbqTtHbaKah5ZHKj8Oh5JGQf+2+glYSNej8y5tcU72ThLn/yWFirimoywB7MCwbvsyBNEr+QHMwSMrf6lqVxFBR+EF+XRAXRCoADqVupPYsngQsb7GsCW7tnfavRhonHStOqq4co+pqqrRrpFOKgXGzzXUzrlDafduiU4UulaCZXf6NzIAuO3e2rVv39LZW6hom6L/sYatfWHgmgOjR3a6/+EKonhIj6LhGSmMaFvDAoeTiMObtQFvy2IbfKh";
 
     /* local OpMode members. */
     public HardwareMap hwMap = null;
@@ -101,13 +100,13 @@ public class HardwareMapping {
 
 
         //vuforia things
-        int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
-        VuforiaLocalizer.Parameters parametersV = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
-        parametersV.vuforiaLicenseKey = VUFORIA_KEY;
-        parametersV.cameraName = webcamName;
+        //int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
+        //VuforiaLocalizer.Parameters parametersV = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+        //parametersV.vuforiaLicenseKey = VUFORIA_KEY;
+        //parametersV.cameraName = webcamName;
         //  Instantiate the Vuforia engine
-        vuforia = ClassFactory.getInstance().createVuforia(parametersV);
-        vuforiaStuff = new VuforiaStuff(vuforia);
+        //vuforia = ClassFactory.getInstance().createVuforia(parametersV);
+        //vuforiaStuff = new VuforiaStuff(vuforia);
     }
 
     /*public void armOut(double armDistance, double armPower) {
