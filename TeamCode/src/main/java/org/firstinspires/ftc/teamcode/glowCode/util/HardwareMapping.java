@@ -18,7 +18,7 @@ import java.util.List;
 public class HardwareMapping {
 
     /* Public OpMode members. */
-    //public DcMotor shooterRight = null;
+    public DcMotor carouselArm = null;
     //public DcMotor shooterLeft = null;
     //public DcMotor intake = null;
     //public DcMotor wobbleLift = null;
@@ -65,7 +65,7 @@ public class HardwareMapping {
 /*End Copied out of SampleMecanumDrive*/
 
         // Define and Initialize Motors
-        //shooterRight = hwMap.get(DcMotorEx.class, "shooterRight");
+        carouselArm = hwMap.get(DcMotorEx.class, "carouselArm");
         //shooterLeft = hwMap.get(DcMotorEx.class, "shooterLeft");
         //intake = hwMap.get(DcMotorEx.class, "intake");
         //wobbleLift = hwMap.get(DcMotorEx.class, "wobbleLift");
@@ -117,15 +117,14 @@ public class HardwareMapping {
         }
         wobbleLift.setPower(0);
     }*/
-
-    /*public void flickRings() {
-        flicker.setPosition(0);
+    public void flickRings(int power) {
+        carouselArm.setPower(power);
         ElapsedTime runtime2 = new ElapsedTime();
-        while(runtime2.milliseconds() < 1000){
-            if (runtime2.milliseconds() > 500) {
-                flicker.setPosition(.3);
+        while(runtime2.milliseconds() < 4000){
+            if (runtime2.milliseconds() > 1000) {
+                carouselArm.setPower(power);
 
             }
         }
-    }*/
+    }
 }
