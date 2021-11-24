@@ -84,10 +84,13 @@ public class TestTeleOp extends OpMode {
 
             robot.claw.setPosition(gamepad2.right_trigger);
             /* Telemetry for debugging  */
-            telemetry.addData("Joy XL YL XR", String.format("%.2f", gamepad1LeftX) + " " +
-                    String.format("%.2f", gamepad1LeftY) + " " + String.format("%.2f", gamepad1RightX));
-            telemetry.addData("Stick", gamepad1.right_stick_y);
-            telemetry.update();
-
+            //telemetry.addData("Joy XL YL XR", String.format("%.2f", gamepad1LeftX) + " " +
+                   // String.format("%.2f", gamepad1LeftY) + " " + String.format("%.2f", gamepad1RightX));
+            //telemetry.addData("Stick", gamepad1.right_stick_y);
+            telemetry.addData("Encoders:", String.format("%d",robot.leftFront.getCurrentPosition()) + " " +
+                            String.format("%d",robot.rightFront.getCurrentPosition()) + " " +
+                            String.format("%d",robot.leftRear.getCurrentPosition()) + " " +
+                            String.format("%d",robot.rightRear.getCurrentPosition()) );
+                    telemetry.update();
     }
 }

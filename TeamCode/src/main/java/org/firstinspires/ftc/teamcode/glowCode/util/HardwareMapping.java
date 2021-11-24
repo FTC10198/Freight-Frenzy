@@ -20,6 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class HardwareMapping {
 
     /* Public OpMode members. */
@@ -30,6 +31,7 @@ public class HardwareMapping {
     public Servo claw = null;
     //public Servo ArmServo = null;
     //public Servo liftServo = null;
+
 
     //public VuforiaStuff vuforiaStuff;
     //private VuforiaLocalizer vuforia;
@@ -112,6 +114,8 @@ public class HardwareMapping {
         //  Instantiate the Vuforia engine
         //vuforia = ClassFactory.getInstance().createVuforia(parametersV);
         //vuforiaStuff = new VuforiaStuff(vuforia);
+
+
     }
 
     /*public void armOut(double armDistance, double armPower) {

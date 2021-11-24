@@ -4,6 +4,8 @@ package org.firstinspires.ftc.teamcode.glowCode;
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+        //import org.firstinspires.ftc.teamcode.glowCode.util.VuforiaStuff;
+
         import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Autonomous
@@ -11,23 +13,24 @@ public class TestAuto extends LinearOpMode{
     private final org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping robot = new org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping();
 
     //SampleMecanumDrive drives = new SampleMecanumDrive(hardwareMap);
-    //VuforiaStuff.skystonePos pos;
+    //VuforiaStuff.elementPos pos;
 
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive drives = new org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive(hardwareMap);
 
-        //pos = robot.vuforiaStuff.vuforiascan(false, false);
+        //pos = robot.vuforiaStuff.vuforiascan(true, false);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         if (opModeIsActive()) {
 
-            // We want to start the bot at x: 10, y: -8, heading: 90 degrees
+           /* // We want to start the bot at x: 10, y: -8, heading: 90 degrees
             Pose2d startPose = new Pose2d(10, -8, Math.toRadians(90));
 
             drives.setPoseEstimate(startPose);
@@ -52,6 +55,8 @@ public class TestAuto extends LinearOpMode{
 
             drives.turn(90);
             drives.turn(-90);
+
+            */
         }
     }
 }

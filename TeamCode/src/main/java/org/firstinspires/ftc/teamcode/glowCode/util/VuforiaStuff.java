@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.glowCode.util;
-////copied from 10435 github, 11/27/19
+////copied from 10435 github, 11/27
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -26,11 +26,11 @@ public class VuforiaStuff {
         this.vuforia = vuforia;
     }
 
-    public enum skystonePos {
-        ZERO, ONE, FOUR, ERR
+    public enum elementPos {
+        LEFT, CENTER, RIGHT;
     }
 
-    public skystonePos vuforiascan(boolean saveBitmaps, boolean red) {
+    public elementPos vuforiascan(boolean saveBitmaps, boolean red) {
         Image rgbImage = null;
         int rgbTries = 0;
         /*
@@ -121,11 +121,10 @@ public class VuforiaStuff {
                 cropWidth = (int) ((460.0 / 720.0) * bitmap.getWidth());
                 cropHeight = (int) ((120.0 / 480.0) * bitmap.getHeight());
             } else {
-                //orgin is top left
-                cropStartX = (int) ((400 / 1280.0) * bitmap.getWidth()); //was 320
-                cropStartY = (int) ((150 / 720.0) * bitmap.getHeight()); //was 360
-                cropWidth = (int) ((150 / 1280.0) * bitmap.getWidth()); //was 670
-                cropHeight = (int) ((125 / 720.0) * bitmap.getHeight());
+                cropStartX = (int) ((160.0 / 1280.0) * bitmap.getWidth()); //was 320
+                cropStartY = (int) ((180.0 / 720.0) * bitmap.getHeight()); //was 360
+                cropWidth = (int) ((750.0 / 1280.0) * bitmap.getWidth()); //was 670
+                cropHeight = (int) ((165.0 / 720.0) * bitmap.getHeight());
             }
 
 //            DbgLog.msg("10435 vuforiascan"
@@ -167,64 +166,60 @@ public class VuforiaStuff {
             int pixel;
             int bitmapWidth = bitmap.getWidth();
             int bitmapHeight = bitmap.getHeight();
-            int colHeight = (int) ((double) bitmapHeight / 6.0);
-            int colorLStartCol = (int) ((double) bitmapHeight * (1.0 / 6.0) - ((double) colHeight / 2.0));
-            int colorCStartCol = (int) ((double) bitmapHeight * (3.0 / 6.0) - ((double) colHeight / 2.0));
-            int colorRStartCol = (int) ((double) bitmapHeight * (5.0 / 6.0) - ((double) colHeight / 2.0));
+            int colWidth = (int) ((double) bitmapWidth / 6.0);
+            int colorLStartCol = (int) ((double) bitmapWidth * (1.0 / 6.0) - ((double) colWidth / 2.0));
+            int colorCStartCol = (int) ((double) bitmapWidth * (3.0 / 6.0) - ((double) colWidth / 2.0));
+            int colorRStartCol = (int) ((double) bitmapWidth * (5.0 / 6.0) - ((double) colWidth / 2.0));
 
-            for (width = 0; width < bitmapWidth; ++width) {
-                for (height = colorLStartCol; height < colorLStartCol + colHeight; ++height) {
+            for (height = 0; height < bitmapHeight; ++height) {
+                for (width = colorLStartCol; width < colorLStartCol + colWidth; ++width) {
                     pixel = bitmap.getPixel(width, height);
-                    /*
                     if (Color.red(pixel) < 200 || Color.green(pixel) < 200 || Color.blue(pixel) < 200) {
                         yellowCountL += Color.red(pixel);
                         blackCountL += Color.blue(pixel);
                     }
-                    */
-                    if (Color.red(pixel) > 225 && Color.green(pixel) > 140 && Color.blue(pixel) < 20) {
-                        yellowCountR += 1;
-                        //orange
-                    } else if (Color.red(pixel) < 200 && Color.green(pixel) < 200 && Color.blue(pixel) < 200) {
-                        blackCountR += 1;
+
+                    /*
+                    if (Color.red(pixel) > 120 && Color.green(pixel) > 80 && Color.blue(pixel) < 20) {
+                        yellowCountL += 1;
+                    } else if (Color.red(pixel) < 120 && Color.green(pixel) < 120 && Color.blue(pixel) < 120) {
+                        blackCountL += 1;
                     }
+                     */
 
                     //colorcountL += Color.red(pixel) + Color.green(pixel) + Color.blue(pixel);
                 }
-                for (height = colorCStartCol; height < colorCStartCol + colHeight; ++height) {
+                for (width = colorCStartCol; width < colorCStartCol + colWidth; ++width) {
                     pixel = bitmap.getPixel(width, height);
 
-                    /*
                     if (Color.red(pixel) < 200 || Color.green(pixel) < 200 || Color.blue(pixel) < 200) {
                         yellowCountC += Color.red(pixel);
                         blackCountC += Color.blue(pixel);
                     }
-                     */
-                    if (Color.red(pixel) > 225 && Color.green(pixel) > 140 && Color.blue(pixel) < 20) {
-                        yellowCountR += 1;
-                        //orange
-                    } else if (Color.red(pixel) < 200 && Color.green(pixel) < 200 && Color.blue(pixel) < 200) {
-                        blackCountR += 1;
+                    /*
+                    if (Color.red(pixel) > 120 && Color.green(pixel) > 80 && Color.blue(pixel) < 20) {
+                        yellowCountC += 1;
+                    } else if (Color.red(pixel) < 120 && Color.green(pixel) < 120 && Color.blue(pixel) < 120) {
+                        blackCountC += 1;
                     }
-
-
+                    */
                     //colorcountC += Color.red(pixel) + Color.green(pixel) + Color.blue(pixel);
                 }
 
-                for (height = colorRStartCol; height < colorRStartCol + colHeight; ++height) {
+                for (width = colorRStartCol; width < colorRStartCol + colWidth; ++width) {
                     pixel = bitmap.getPixel(width, height);
-                    /*
+
                     if (Color.red(pixel) < 200 || Color.green(pixel) < 200 || Color.blue(pixel) < 200) {
                         yellowCountR += Color.red(pixel);
                         blackCountR += Color.blue(pixel);
                     }
-                    */
-                    if (Color.red(pixel) > 225 && Color.green(pixel) > 140 && Color.blue(pixel) < 20) {
+                    /*
+                    if (Color.red(pixel) > 120 && Color.green(pixel) > 80 && Color.blue(pixel) < 20) {
                         yellowCountR += 1;
-                        //orange
-                    } else if (Color.red(pixel) < 200 && Color.green(pixel) < 200 && Color.blue(pixel) < 200) {
+                    } else if (Color.red(pixel) < 120 && Color.green(pixel) < 120 && Color.blue(pixel) < 120) {
                         blackCountR += 1;
                     }
-
+                    */
                     //colorcountR += Color.red(pixel) + Color.green(pixel) + Color.blue(pixel);
                 }
             }
@@ -235,7 +230,7 @@ public class VuforiaStuff {
         double blackYellowRatioR = blackCountR / yellowCountR;
 
 
-        skystonePos pos;
+        elementPos pos;
         /*
         DbgLog.msg("color L: " + Double.toString(colorcountL));
         DbgLog.msg("color C: " + Double.toString(colorcountC));
@@ -248,18 +243,19 @@ public class VuforiaStuff {
             pos = skystonePos.RIGHT;
         }
 */
-        if (yellowCountL > blackCountL && yellowCountR > blackCountR) {
-            pos = skystonePos.FOUR; //was left, but image upside down
-            // else if (yellowCountL <=  && yellowCountR > 55000) {
-            //pos = skystonePos.ONE;
-        } else if (yellowCountL < blackCountL && yellowCountR < blackCountR) {
-            pos = skystonePos.ZERO; //was right, but image upside down
-        } else pos = skystonePos.ONE;
+        if (blackYellowRatioL > blackYellowRatioC && blackYellowRatioL > blackYellowRatioR) {
+            pos = elementPos.RIGHT; //was left, but image upside down
+        } else if (blackYellowRatioC > blackYellowRatioL && blackYellowRatioC > blackYellowRatioR) {
+            pos = elementPos.CENTER;
+        } else {
+            pos = elementPos.LEFT; //was right, but image upside down
+        }
 
 //        DbgLog.msg("black/yellow L: " + blackCountL + "/" + yellowCountL);
 //        DbgLog.msg("black/yellow C: " + blackCountC + "/" + yellowCountC);
 //        DbgLog.msg("black/yellow R: " + blackCountR + "/" + yellowCountR);
 
         return pos;
+
     }
 }
