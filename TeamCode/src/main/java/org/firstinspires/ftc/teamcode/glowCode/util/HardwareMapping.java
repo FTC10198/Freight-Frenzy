@@ -33,9 +33,11 @@ public class HardwareMapping {
     //public Servo liftServo = null;
 
 
-    //public VuforiaStuff vuforiaStuff;
-    //private VuforiaLocalizer vuforia;
-    //private static final String VUFORIA_KEY = "Ac5oJT3/////AAABmaqjC8BtVEdCqJ9KEctcjrJjRRHPEsjVpJWvESCluMdAjHDqmXj1hS15xQ/ZC19fWDvWS+synqHGRqZmXH+i3WbN2DElVFCs667s5+7HrgrsLzKbbqTtHbaKah5ZHKj8Oh5JGQf+2+glYSNej8y5tcU72ThLn/yWFirimoywB7MCwbvsyBNEr+QHMwSMrf6lqVxFBR+EF+XRAXRCoADqVupPYsngQsb7GsCW7tnfavRhonHStOqq4co+pqqrRrpFOKgXGzzXUzrlDafduiU4UulaCZXf6NzIAuO3e2rVv39LZW6hom6L/sYatfWHgmgOjR3a6/+EKonhIj6LhGSmMaFvDAoeTiMObtQFvy2IbfKh";
+    /*public VuforiaStuff vuforiaStuff;
+    private VuforiaLocalizer vuforia;
+    private static final String VUFORIA_KEY = "Ac5oJT3/////AAABmaqjC8BtVEdCqJ9KEctcjrJjRRHPEsjVpJWvESCluMdAjHDqmXj1hS15xQ/ZC19fWDvWS+synqHGRqZmXH+i3WbN2DElVFCs667s5+7HrgrsLzKbbqTtHbaKah5ZHKj8Oh5JGQf+2+glYSNej8y5tcU72ThLn/yWFirimoywB7MCwbvsyBNEr+QHMwSMrf6lqVxFBR+EF+XRAXRCoADqVupPYsngQsb7GsCW7tnfavRhonHStOqq4co+pqqrRrpFOKgXGzzXUzrlDafduiU4UulaCZXf6NzIAuO3e2rVv39LZW6hom6L/sYatfWHgmgOjR3a6/+EKonhIj6LhGSmMaFvDAoeTiMObtQFvy2IbfKh";
+
+     */
 
     /* local OpMode members. */
     public HardwareMap hwMap = null;
@@ -102,18 +104,20 @@ public class HardwareMapping {
         //liftServo.setPosition(0.05);
         /*clampServo.setPosition(0.35);*/
 
-        WebcamName webcamName;
-        webcamName = hwMap.get(WebcamName.class, "Webcam");
+        //WebcamName webcamName;
+        //webcamName = hwMap.get(WebcamName.class, "Webcam");
 
 
-        //vuforia things
-        //int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
-        //VuforiaLocalizer.Parameters parametersV = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
-        //parametersV.vuforiaLicenseKey = VUFORIA_KEY;
-        //parametersV.cameraName = webcamName;
+        /*//vuforia things
+        int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
+        VuforiaLocalizer.Parameters parametersV = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+        parametersV.vuforiaLicenseKey = VUFORIA_KEY;
+        parametersV.cameraName = webcamName;
         //  Instantiate the Vuforia engine
-        //vuforia = ClassFactory.getInstance().createVuforia(parametersV);
-        //vuforiaStuff = new VuforiaStuff(vuforia);
+        vuforia = ClassFactory.getInstance().createVuforia(parametersV);
+        vuforiaStuff = new VuforiaStuff(vuforia);
+
+         */
 
 
     }

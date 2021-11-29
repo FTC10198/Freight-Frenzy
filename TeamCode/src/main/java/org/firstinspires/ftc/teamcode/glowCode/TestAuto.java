@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.glowCode;
         import com.acmerobotics.roadrunner.trajectory.Trajectory;
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
         //import org.firstinspires.ftc.teamcode.glowCode.util.VuforiaStuff;
 
         import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -12,7 +11,7 @@ package org.firstinspires.ftc.teamcode.glowCode;
 public class TestAuto extends LinearOpMode{
     private final org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping robot = new org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping();
 
-    //SampleMecanumDrive drives = new SampleMecanumDrive(hardwareMap);
+    SampleMecanumDrive drives = new SampleMecanumDrive(hardwareMap);
     //VuforiaStuff.elementPos pos;
 
     @Override
