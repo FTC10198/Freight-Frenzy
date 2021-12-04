@@ -65,10 +65,10 @@ public class HardwareMapping {
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
-        leftFront = hwMap.get(DcMotorEx.class, "leftFront");
+        //leftFront = hwMap.get(DcMotorEx.class, "leftFront");
         leftRear = hwMap.get(DcMotorEx.class, "leftRear");
         rightRear = hwMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hwMap.get(DcMotorEx.class, "rightFront");
+        //rightFront = hwMap.get(DcMotorEx.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 /*End Copied out of SampleMecanumDrive*/
