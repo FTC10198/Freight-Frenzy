@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //          X           X
 //            X       X
 //        */
-@TeleOp
+@TeleOp (name = "TankTeleOp")
 //@Disabled
 public class teleOp extends OpMode {
     private final HardwareMapping robot = new HardwareMapping();

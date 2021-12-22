@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.util.Range;
 //          X           X
 //            X       X
 //        */
-@TeleOp
+@TeleOp (name = "MecTeleOp")
 //@Disabled
 public class TestTeleOp extends OpMode {
     private final HardwareMapping robot = new HardwareMapping();
