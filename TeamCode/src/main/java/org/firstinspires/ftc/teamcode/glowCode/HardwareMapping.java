@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.glowCode.util;
+package org.firstinspires.ftc.teamcode.glowCode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -33,11 +33,11 @@ public class HardwareMapping {
     //public Servo liftServo = null;
 
 
-    /*public VuforiaStuff vuforiaStuff;
+    public VuforiaStuff vuforiaStuff;
     private VuforiaLocalizer vuforia;
     private static final String VUFORIA_KEY = "Ac5oJT3/////AAABmaqjC8BtVEdCqJ9KEctcjrJjRRHPEsjVpJWvESCluMdAjHDqmXj1hS15xQ/ZC19fWDvWS+synqHGRqZmXH+i3WbN2DElVFCs667s5+7HrgrsLzKbbqTtHbaKah5ZHKj8Oh5JGQf+2+glYSNej8y5tcU72ThLn/yWFirimoywB7MCwbvsyBNEr+QHMwSMrf6lqVxFBR+EF+XRAXRCoADqVupPYsngQsb7GsCW7tnfavRhonHStOqq4co+pqqrRrpFOKgXGzzXUzrlDafduiU4UulaCZXf6NzIAuO3e2rVv39LZW6hom6L/sYatfWHgmgOjR3a6/+EKonhIj6LhGSmMaFvDAoeTiMObtQFvy2IbfKh";
 
-     */
+
 
     /* local OpMode members. */
     public HardwareMap hwMap = null;
@@ -65,10 +65,10 @@ public class HardwareMapping {
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
-        //leftFront = hwMap.get(DcMotorEx.class, "leftFront");
+        leftFront = hwMap.get(DcMotorEx.class, "leftFront");
         leftRear = hwMap.get(DcMotorEx.class, "leftRear");
         rightRear = hwMap.get(DcMotorEx.class, "rightRear");
-        //rightFront = hwMap.get(DcMotorEx.class, "rightFront");
+        rightFront = hwMap.get(DcMotorEx.class, "rightFront");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 /*End Copied out of SampleMecanumDrive*/
@@ -78,7 +78,11 @@ public class HardwareMapping {
         clawArm = hwMap.get(DcMotorEx.class, "clawArm");
         //intake = hwMap.get(DcMotorEx.class, "intake");
         //wobbleLift = hwMap.get(DcMotorEx.class, "wobbleLift");
-
+        clawArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Set all motors to zero power
         //shooterRight.setPower(0);
@@ -104,11 +108,11 @@ public class HardwareMapping {
         //liftServo.setPosition(0.05);
         /*clampServo.setPosition(0.35);*/
 
-        //WebcamName webcamName;
-        //webcamName = hwMap.get(WebcamName.class, "Webcam");
+        WebcamName webcamName;
+        webcamName = hwMap.get(WebcamName.class, "Webcam");
 
 
-        /*//vuforia things
+        //vuforia things
         int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parametersV = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
         parametersV.vuforiaLicenseKey = VUFORIA_KEY;
@@ -117,7 +121,7 @@ public class HardwareMapping {
         vuforia = ClassFactory.getInstance().createVuforia(parametersV);
         vuforiaStuff = new VuforiaStuff(vuforia);
 
-         */
+
 
 
     }

@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 //@Disabled
 public class TestTeleOp extends OpMode {
-    private final org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping robot = new org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping();
+    private final HardwareMapping robot = new HardwareMapping();
 
     double slow = 1;
 
@@ -48,9 +48,9 @@ public class TestTeleOp extends OpMode {
 
             // left stick controls direction
             // right stick X controls rotation
-            double gamepad1LeftY = (gamepad1.left_stick_y) * .7 * slow;
-            double gamepad1LeftX = -gamepad1.left_stick_x * .7 * slow;
-            double gamepad1RightX = -gamepad1.right_stick_x * .7 * slow;
+            double gamepad1LeftY = (gamepad1.left_stick_y)  * slow;
+            double gamepad1LeftX = -gamepad1.left_stick_x  * slow;
+            double gamepad1RightX = -gamepad1.right_stick_x  * slow;
             //double gamepad2LeftY = -gamepad1.left_stick_y * .7 * slow;
 
 

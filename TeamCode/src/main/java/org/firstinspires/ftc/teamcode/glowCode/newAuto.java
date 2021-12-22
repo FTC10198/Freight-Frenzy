@@ -1,15 +1,12 @@
 package org.firstinspires.ftc.teamcode.glowCode;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-//import org.firstinspires.ftc.teamcode.glowCode.util.VuforiaStuff;
+//import org.firstinspires.ftc.teamcode.glowCode.VuforiaStuff;
 
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Autonomous
 public class newAuto extends LinearOpMode{
-    private final org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping robot = new org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping();
+    private final HardwareMapping robot = new HardwareMapping();
 
     //SampleMecanumDrive drives = new SampleMecanumDrive(hardwareMap);
     //VuforiaStuff.elementPos pos;
@@ -17,7 +14,7 @@ public class newAuto extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
-        org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive drives = new org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive(hardwareMap);
+        //org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive drives = new org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive(hardwareMap);
 
         //pos = robot.vuforiaStuff.vuforiascan(true, false);
         telemetry.addData("Status", "Initialized");
@@ -59,10 +56,11 @@ public class newAuto extends LinearOpMode{
 
             */
             //robot.driveAtDirection(0,2200,0.3);
-            robot.leftRear.setPower(-0.3);
-            sleep(3000);
-            robot.rightRear.setPower(0.3);
-            sleep(3000);
+            robot.clawArm.setPower(0.2);
+            sleep(500);
+            robot.leftRear.setPower(0.3);
+            robot.rightRear.setPower(-0.3);
+            sleep(5000);
             robot.leftRear.setPower(0);
             robot.rightRear.setPower(0);
 

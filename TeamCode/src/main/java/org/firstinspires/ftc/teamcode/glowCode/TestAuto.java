@@ -1,25 +1,24 @@
 package org.firstinspires.ftc.teamcode.glowCode;
-        import com.acmerobotics.roadrunner.geometry.Pose2d;
-        import com.acmerobotics.roadrunner.trajectory.Trajectory;
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-        //import org.firstinspires.ftc.teamcode.glowCode.util.VuforiaStuff;
+        //import org.firstinspires.ftc.teamcode.glowCode.VuforiaStuff;
 
         import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Autonomous
 public class TestAuto extends LinearOpMode{
-    private final org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping robot = new org.firstinspires.ftc.teamcode.glowCode.util.HardwareMapping();
+    private final HardwareMapping robot = new HardwareMapping();
 
     SampleMecanumDrive drives = new SampleMecanumDrive(hardwareMap);
-    //VuforiaStuff.elementPos pos;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive drives = new org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive(hardwareMap);
 
-        //pos = robot.vuforiaStuff.vuforiascan(true, false);
+        VuforiaStuff.elementPos pos;
+        pos = robot.vuforiaStuff.vuforiascan(true, false);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
