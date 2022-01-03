@@ -136,16 +136,28 @@ public class webcamSample extends LinearOpMode {
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
                         // step through the list of recognitions and display boundary info.
-                        int i = 0;
+                        int i = 2;
+
                         for (Recognition recognition : updatedRecognitions) {
                             telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
                             telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
                                     recognition.getLeft(), recognition.getTop());
                             telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                     recognition.getRight(), recognition.getBottom());
+                            if (recognition.getRight() > recognition.getLeft())
+                                telemetry.addData("Left", ".");
+                            if (recognition.getRight() == recognition.getLeft())
+                                telemetry.addData("Center", ".");
+                            if (recognition.getRight() < recognition.getLeft())
+                                telemetry.addData("Right", ".");
                             i++;
                         }
                         telemetry.update();
+                        ///LINDSEY NOTES FOR 1/3: looks like using recognition.getwhatever you should be able to figure out
+                             // where in the image the found item is (type recognition. and look at all the options).
+                        ////There seems to be an i attached to each item it is finding starting with 0, so you're going
+                            //to need to identify which i is the duck (yes, still start with duck for now since it was working)
+                        ///Start with just having telemetry return left/center/right in this opmode, we can work on getting that into an auto later
                     }
                 }
             }
