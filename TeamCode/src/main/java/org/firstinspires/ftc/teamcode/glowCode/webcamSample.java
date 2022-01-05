@@ -136,7 +136,12 @@ public class webcamSample extends LinearOpMode {
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
                         // step through the list of recognitions and display boundary info.
-                        int i = 2;
+                        int i = 0;
+
+                        for (Recognition recognition : updatedRecognitions) {
+                            if ( recognition.getLabel() != "Duck")
+                            i++;
+                        }
 
                         for (Recognition recognition : updatedRecognitions) {
                             telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
@@ -144,14 +149,16 @@ public class webcamSample extends LinearOpMode {
                                     recognition.getLeft(), recognition.getTop());
                             telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                     recognition.getRight(), recognition.getBottom());
-                            if (recognition.getRight() > recognition.getLeft())
+                            if (recognition.getRight() < 360)
                                 telemetry.addData("Left", ".");
-                            if (recognition.getRight() == recognition.getLeft())
+                            if (recognition.getRight() > 360 && recognition.getRight() < 540)
                                 telemetry.addData("Center", ".");
-                            if (recognition.getRight() < recognition.getLeft())
+                            if (recognition.getRight() > 540 && recognition.getRight() < 720 )
                                 telemetry.addData("Right", ".");
-                            i++;
+
+                            //i++;
                         }
+
                         telemetry.update();
                         ///LINDSEY NOTES FOR 1/3: looks like using recognition.getwhatever you should be able to figure out
                              // where in the image the found item is (type recognition. and look at all the options).
