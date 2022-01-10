@@ -42,7 +42,7 @@ public class newAuto extends LinearOpMode{
             Trajectory traj3 = drives.trajectoryBuilder(traj2.end())
                   .back(50)
                   .build();
-            Trajectory traj4 = drives.trajectoryBuilder(traj3.end())
+            Trajectory traj4 = drives.trajectoryBuilder(traj3.end()\
                   .strafeRight(50)
                   .build();
 
@@ -56,13 +56,18 @@ public class newAuto extends LinearOpMode{
 
             */
             //robot.driveAtDirection(0,2200,0.3);
-            robot.clawArm.setPower(0.2);
-            sleep(500);
-            robot.leftRear.setPower(0.3);
-            robot.rightRear.setPower(-0.3);
-            sleep(5000);
-            robot.leftRear.setPower(0);
-            robot.rightRear.setPower(0);
+            //robot.driveAtDirection(0, 2200, 0.3);
+            //robot.driveAtDirection(270, 200, .3);
+            //pick up duck
+            robot.clawArm.setPower(0.3);
+            sleep(700);
+            robot.driveAtDirection(0, 700, .3);
+            robot.claw.setPosition(1);
+            sleep(100);
+            robot.clawArm.setPower(0.3);
+            sleep(100);
+            robot.claw.setPosition(0);
+
 
 
         }

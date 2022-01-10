@@ -39,6 +39,9 @@ public class TestTeleOp extends OpMode {
                 slow = 1;
             }
         }
+        else if (gamepad1.y) {
+                slow = 1;
+        }
         /*    //power for shooters
         } else if (gamepad1.a) {
             robot.carouselArm.setPower(0.7);

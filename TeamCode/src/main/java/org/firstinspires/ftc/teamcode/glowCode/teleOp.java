@@ -38,6 +38,7 @@ public class teleOp extends OpMode {
                 slow = 1;
             }
         }
+
         /*    //power for shooters
         } else if (gamepad1.a) {
             robot.carouselArm.setPower(0.7);
@@ -47,10 +48,10 @@ public class teleOp extends OpMode {
 
         // left stick controls direction
         // right stick X controls rotation
-        double gamepad1LeftY = (gamepad1.left_stick_y) * .7 * slow;
+        double gamepad1LeftY = gamepad1.left_stick_y * .7 * slow;
         double gamepad1LeftX = -gamepad1.left_stick_x * .7 * slow;
         double gamepad1RightX = gamepad1.right_stick_x * .7 * slow;
-        //double gamepad2LeftY = -gamepad1.left_stick_y * .7 * slow;
+        //double game                                                                                                                                                                       pad2LeftY = -gamepad1.left_stick_y * .7 * slow;
 
 
         // holonomic formulas
