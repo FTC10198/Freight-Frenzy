@@ -43,16 +43,19 @@ public class RedCameraAuto extends LinearOpMode {
             switch (pos) {
 
                 case LEFT:
+                    //move to carousel
+                    robot.driveAtDirection(0, 100, .3);
+                    robot.driveAtDirection(270, 2000, .3);
                     // move left about 6" to align with left stone
                     //pick up duck
-                    robot.clawArm.setPower(0.3);
-                    sleep(700);
-                    robot.driveAtDirection(0, 700, .3);
-                    robot.claw.setPosition(1);
-                    sleep(100);
-                    robot.clawArm.setPower(0.3);
-                    sleep(100);
-                    robot.claw.setPosition(0);
+                    //robot.clawArm.setPower(0.3);
+                    //sleep(700);
+                    //robot.driveAtDirection(0, 700, .3);
+                    //robot.claw.setPosition(1);
+                    //sleep(100);
+                    //robot.clawArm.setPower(0.3);
+                    //sleep(100);
+                    //robot.claw.setPosition(0);
                     //pause to get block
                     /*runtime2.reset();
                     while (runtime2.milliseconds() < 1200) {
@@ -110,6 +113,7 @@ public class RedCameraAuto extends LinearOpMode {
                     break;
 
                 case CENTER:
+
                     //move right to align with stone
                     robot.driveAtDirection(90, 100, .3);
                     //drive forward about 30" with intake on
