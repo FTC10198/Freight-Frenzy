@@ -84,9 +84,10 @@ public class HardwareMapping {
         rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // Set all motors to zero power
-        //shooterRight.setPower(0);
-        //shooterLeft.setPower(0);
+       //rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       //leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);      // Set all motors to zero power
+       //rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);    //shooterRight.setPower(0);
+       //leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);     //shooterLeft.setPower(0);
         //intake.setPower(0);
         //wobbleLift.setPower(0);
         //sonia test
@@ -102,7 +103,6 @@ public class HardwareMapping {
 
         // set the digital channel to input.
         //touchSensor.setMode(DigitalChannel.Mode.INPUT);
-
         claw.setPosition(0);
         //ArmServo.setPosition(0.80);
         //liftServo.setPosition(0.05);
@@ -113,13 +113,15 @@ public class HardwareMapping {
 
 
         //vuforia things
-        int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
+       /* int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parametersV = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
         parametersV.vuforiaLicenseKey = VUFORIA_KEY;
         parametersV.cameraName = webcamName;
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parametersV);
         vuforiaStuff = new VuforiaStuff(vuforia);
+
+        */
 
 
 
@@ -135,7 +137,7 @@ public class HardwareMapping {
         wobbleLift.setPower(0);
     }*/
   /*  public void flickRings(int power) {
-        carouselArm.setPower(power);
+        carouselArm.setPower(power);od
         ElapsedTime runtime2 = new ElapsedTime();
         while(runtime2.milliseconds() < 4000){
             if (runtime2.milliseconds() > 1000) {
@@ -145,10 +147,41 @@ public class HardwareMapping {
         }
     }
    */
+    public void moveToPosition(double driveDistance, double speed) {
+         int move = (int) driveDistance;
+
+         leftRear.setTargetPosition(leftRear.getCurrentPosition()+move);
+         rightRear.setTargetPosition(rightRear.getCurrentPosition()+move);
+         leftFront.setTargetPosition(leftFront.getCurrentPosition()+move);
+         rightFront.setTargetPosition(rightFront.getCurrentPosition()+move);
+          rightRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+          leftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+          rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+          leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+          leftRear.setPower(speed);
+                    rightRear.setPower(speed);
+
+                              leftFront.setPower(speed);
+
+                                        rightFront.setPower(speed);
+           while (leftRear.isBusy()&&leftFront.isBusy()&&rightFront.isBusy()&&rightRear.isBusy()) {
+
+           }
+           leftRear.setPower(0);
+                     rightRear.setPower(0);
+                               rightFront.setPower(0);
+                               leftFront.setPower(0);
+
+    }
     public void driveAtDirection(double AngleIn, double driveDistance, double motorPower) {
         double LeftYMotorFix = -1;
         double LeftXMotorFix = -1;
         double RightXMotorFix = -1;
+        rightRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         double frontLeftStart = leftRear.getCurrentPosition();
         double frontRightStart = rightRear.getCurrentPosition();
@@ -227,5 +260,36 @@ public class HardwareMapping {
         leftRear.setPower(0);
         rightRear.setPower(0);
     }
+    public void turnRight(double driveDistanceRight, double motorPowerRight) {
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        double frontLeftStart = leftRear.getCurrentPosition();
+
+        while ((leftRear.getCurrentPosition() - frontLeftStart) < driveDistanceRight) {
+            double RightX = motorPowerRight;
+
+            // write the values to the motors
+            rightFront.setPower(RightX);
+            leftFront.setPower(RightX);
+            leftRear.setPower(RightX);
+            rightRear.setPower(RightX);
+        }
+    }
+
+    public void turnLeft(double driveDistanceLeft, double motorPowerLeft) {
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        double frontLeftStart = leftRear.getCurrentPosition();
+
+        while (Math.abs(leftRear.getCurrentPosition() - frontLeftStart)
+                < driveDistanceLeft) {
+            double RightX = -motorPowerLeft;
+
+            // write the values to the motors
+            rightFront.setPower(RightX);
+            leftFront.setPower(RightX);
+            leftRear.setPower(RightX);
+            rightRear.setPower(RightX);
+        }
+    }
+
 
 }
